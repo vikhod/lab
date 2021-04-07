@@ -1,0 +1,12 @@
+# create seed disk with cloud_init
+cloud-localds -v seed-OpenStackVM.qcow2 cloud_init.cfg
+
+# original image is 2G, create snapshot and make it 10G
+qemu-img create -b ~/Lab/OpenStackVM/bionic-server-cloudimg-amd64.img -f qcow2 -F qcow2 snapshot-OpenStackVM.qcow2 100G
+
+# show snapshot info
+qemu-img info snapshot-bionic-server-cloudimg.qcow2
+
+# create OpenStackVM
+virt-install --name OpenStackVM --virt-type kvm --memory 16384 --vcpus 4 --boot hd,menu=on --disk path=/home/intern4/Lab/OpenStackVM/seed-OpenStackVM.qcow2,device=cdrom --disk path=/home/intern4/Lab/OpenStackVM/snapshot-OpenStackVM.qcow2,device=disk --graphics vnc --os-type Linux --os-variant ubuntu18.04 --network default --console pty,target_type=serial
+
