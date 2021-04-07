@@ -1,4 +1,6 @@
 *.img
 *.qcow2
 *.terraform*
+*.save
 volume
+
