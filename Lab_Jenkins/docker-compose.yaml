@@ -7,7 +7,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /home/user/Lab_Jenkins/volume/jenkins/jenkins_home:/var/jenkins_home
+      - /home/user/Lab/Lab_Jenkins/volume/jenkins/jenkins_home:/var/jenkins_home
 
   gerrit:
     image: gerritcodereview/gerrit
@@ -17,13 +17,13 @@ services:
     depends_on:
       - ldap
     volumes:
-      - /home/user/Lab_Jenkins/volume/gerrit/etc:/var/gerrit/etc
-      - /home/user/Lab_Jenkins/volume/gerrit/git:/var/gerrit/git
-      - /home/user/Lab_Jenkins/volume/gerrit/index:/var/gerrit/index
-      - /home/user/Lab_Jenkins/volume/gerrit/cache:/var/gerrit/cache
+      - /home/user/Lab/Lab_Jenkins/volume/gerrit/etc:/var/gerrit/etc
+      - /home/user/Lab/Lab_Jenkins/volume/gerrit/git:/var/gerrit/git
+      - /home/user/Lab/Lab_Jenkins/volume/gerrit/index:/var/gerrit/index
+      - /home/user/Lab/Lab_Jenkins/volume/gerrit/cache:/var/gerrit/cache
     environment:
       - CANONICAL_WEB_URL=http://localhost
-#    entrypoint: java -jar /var/gerrit/bin/gerrit.war init -d /var/gerrit
+    entrypoint: java -jar /var/gerrit/bin/gerrit.war init -d /var/gerrit
 
   ldap:
     image: osixia/openldap
@@ -33,8 +33,8 @@ services:
     environment:
       - LDAP_ADMIN_PASSWORD=secret
     volumes:
-      - /home/user/Lab_Jenkins/volume/ldap/var:/var/lib/ldap
-      - /home/user/Lab_Jenkins/volume/ldap/etc:/etc/ldap/slapd.d
+      - /home/user/Lab/Lab_Jenkins/volume/ldap/var:/var/lib/ldap
+      - /home/user/Lab/Lab_Jenkins/volume/ldap/etc:/etc/ldap/slapd.d
 
   ldap-admin:
     image: osixia/phpldapadmin
